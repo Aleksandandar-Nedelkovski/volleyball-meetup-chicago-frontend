@@ -1,0 +1,14 @@
+.react-calendar {
+  margin: 10% auto;
+  width: 70% !important;
+  height: 100%;
+}
+
+button {
+  height: 70px;
+}
+
+.react-calendar__tile--now {
+  background: lightblue !important;
+  color: black;
+}
