@@ -1,11 +1,13 @@
 import React from 'react';
 
 function App() {
-
   return (
-    <h1>
-      Intermediate Volleyball Chicago
-    </h1>
+    <div>
+      <h1>
+        Intermediate Volleyball Chicago
+      </h1>
+      <small>You are running this application in <b>{process.env.NODE_ENV}</b> mode.</small>
+    </div>
   );
 }
 
