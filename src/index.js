@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
-import AppRouter from './util/Router';
+import AppRouter from './utils/Router';
 
 ReactDOM.render(
   <AppRouter />,
