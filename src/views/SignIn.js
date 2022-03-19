@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -50,17 +50,17 @@ const Login = ({ login, isAuthenticated }) => {
               placeholder="Password" />
             <label htmlFor="floatingPassword">Password</label>
           </div>
-          <button 
+          <button
             className="w-100 btn btn-lg btn-primary"
             value="Login"
             type="submit">Sign in</button>
         </form>
         <p className="my-1">
-              Don't have an account?{" "}
-              <Link className="text-black font-bold" to="sign-up">
-                Sign Up
-              </Link>
-            </p>
+          Don't have an account?{" "}
+          <Link className="text-black font-bold" to="/sign-up">
+            Sign Up
+          </Link>
+        </p>
       </main>
     </div>
   )

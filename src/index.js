@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 import AppRouter from './utils/Router';
+import "./index.css";
 
 ReactDOM.render(
   <AppRouter />,

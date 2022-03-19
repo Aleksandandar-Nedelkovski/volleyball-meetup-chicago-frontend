@@ -1,4 +1,3 @@
-// import api from "../utils/api";
 import api from "../utils/api";
 import { setAlert } from "./alert";
 import {
@@ -14,7 +13,7 @@ import {
 // Load User
 export const loadUser = () => async (dispatch) => {
   try {
-    const res = await api.get("/sign-in");
+    const res = await api.get("/getCurrentUser");
 
     dispatch({
       type: USER_LOADED,
@@ -30,7 +29,7 @@ export const loadUser = () => async (dispatch) => {
 // Register User
 export const register = (formData) => async (dispatch) => {
   try {
-    const res = await api.post("/users", formData);
+    const res = await api.post("/signup", formData);
 
     dispatch({
       type: REGISTER_SUCCESS,
@@ -55,14 +54,14 @@ export const login = (email, password) => async (dispatch) => {
   const body = { email, password };
 
   try {
-    const res = await api.post("/sign-in", body);
+    const res = await api.post("/login", body);
 
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data,
     });
 
-    dispatch(loadUser());
+    // dispatch(loadUser());
   } catch (err) {
     const errors = err.response.data.errors;
 
