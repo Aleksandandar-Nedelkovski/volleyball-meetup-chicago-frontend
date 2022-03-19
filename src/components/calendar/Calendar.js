@@ -26,7 +26,7 @@ function tileContent({ date, view }) {
 // const volleyballFakeData = [{id: "5", name: "Secret Saturday", date: "2/12/2022"}];
 
 const VolleyballCalendar = () => {
-  const [value, onChange] = useState(new Date());
+  const [onChange] = useState(new Date());
   return <Calendar
     tileContent={tileContent}
     onChange={onChange}

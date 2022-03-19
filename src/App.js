@@ -1,14 +1,28 @@
-import React from 'react';
+import React, { Fragment } from "react";
+import { Navigate } from "react-router-dom";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
-function App() {
+const App = ({isAuthenticated}) => {
+  if (isAuthenticated) {
+    return <Navigate to="/dashboard" />
+  }
   return (
-    <div>
+    <Fragment>
       <h1>
         Intermediate Volleyball Chicago
       </h1>
       <small>You are running this application in <b>{process.env.NODE_ENV}</b> mode.</small>
-    </div>
+    </Fragment>
   );
 }
 
-export default App;
+App.propTypes = {
+  isAuthenticated: PropTypes.bool,
+};
+
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps)(App);
