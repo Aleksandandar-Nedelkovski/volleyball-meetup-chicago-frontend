@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 import AppRouter from './utils/Router';
 import "./index.css";
+import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
   <AppRouter />,
