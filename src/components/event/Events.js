@@ -12,23 +12,6 @@ const Events = ({ getEvents, event: { events } }) => {
     console.log(events)
   }, [getEvents]);
 
-  // useEffect(() => {
-  //   fetch("https://backend-volleyball-chicago.herokuapp.com/events")
-  //   .then(res => res.json())
-  //   .then(
-  //     (result) => {
-  //       console.log(result)
-  //       setEvents(result);
-  //     },
-  //     (error) => {
-  //       this.setState({
-  //         isLoaded: true,
-  //         error
-  //       });
-  //     }
-  //   )
-  // }, [])
-
   return (
     <section className="container">
       <h1 className="large">Events</h1>
