@@ -3,7 +3,7 @@ import store from '../store';
 import { LOGOUT } from '../actions/types';
 
 const api = axios.create({
-  baseURL: '/',
+  baseURL: 'https://backend-volleyball-chicago.herokuapp.com/',
   headers: {
     'Content-Type': 'application/json'
   }

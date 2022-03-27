@@ -1,25 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect} from "react";
+import { getEvents } from "../../actions/event"
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import EventForm from './EventForm';
-import { getEvents } from '../../actions/event';
+import EventItem from "./EventItem"
 
-
-const Events = ({ getEvents, event: { events } }) => {
-
+const Events = ( { getEvents, event: { events } }) => {
   useEffect(() => {
     getEvents();
-    console.log(events)
   }, [getEvents]);
-
+  
+  console.log(events)
   return (
     <section className="container">
       <h1 className="large">Events</h1>
-      {/* <EventForm /> */}
-      {/* <div>{events.events.map((event) => <p key={event.id}>{event}</p>)}</div> */}
+      <p className="lead">
+        <i className="fas fa-user" /> Welcome to the community
+      </p>
+      <div className="events">
+        {events.map((event) => (
+          <EventItem key={event._id} event={event} />
+        ))}
+      </div>
     </section>
   )
 }
+
 
 
 Events.propTypes = {
@@ -28,7 +33,7 @@ Events.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  event: state.event
+  event: state.event.events
 });
 
 export default connect(mapStateToProps, { getEvents })(Events);
