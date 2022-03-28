@@ -9,17 +9,25 @@ import Input from './Input';
 import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
 import Icon from "./icon"
 import { useNavigate } from 'react-router-dom';
+import { login, register } from "../../actions/auth";
 
 import { AUTH } from '../../actions/types';
 
-const initialState = { name: '', email: '', password: '', confirmPassword: '' };
 
 const Auth = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [form] = useState(initialState);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const { name, email, password } = formData;
+
   const [showPassword, setShowPassword] = useState(false)
   const [isSignup, setIsSignup] = useState(false);
 
@@ -27,10 +35,17 @@ const Auth = () => {
 
   const handleChange = (e) => {
     e.preventDefault();
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (isSignup) {
+      register({name, email, password});
+    } else {
+      login({email, password});
+    }
   };
 
   const switchMode = () => {
@@ -51,7 +66,6 @@ const Auth = () => {
 
     const googleError = () => console.log('Google Sign In was unsuccessful. Try again later');
 
-
   return (
     <Container component="main" maxWidth="xs">
       <Paper className={classes.paper} elevation={6}>
@@ -59,6 +73,7 @@ const Auth = () => {
           <PeopleAltIcon />
         </Avatar>
         <Typography component="h1" variant="h5">{isSignup ? 'Sign up' : 'Sign in'}</Typography>
+
         <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             {isSignup && (
@@ -74,7 +89,7 @@ const Auth = () => {
             {isSignup ? 'Sign Up' : 'Sign In'}
           </Button>
           <GoogleLogin
-            clientId="516747975733-0ptt8p439tqqiq1lu1m3l1vjb1j0o3ri.apps.googleusercontent.com"
+            clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
             render={(renderProps) => (
               <Button className={classes.googleButton} color="primary" fullWidth onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon />} variant="contained">
                 Google Sign In

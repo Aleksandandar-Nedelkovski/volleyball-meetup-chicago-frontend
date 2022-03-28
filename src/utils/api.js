@@ -2,8 +2,9 @@ import axios from 'axios';
 import store from '../store';
 import { LOGOUT } from '../actions/types';
 
+const ApiUrl = process.env.REACT_APP_API
 const api = axios.create({
-  baseURL: 'https://backend-volleyball-chicago.herokuapp.com/',
+  baseURL: ApiUrl,
   headers: {
     'Content-Type': 'application/json'
   }
