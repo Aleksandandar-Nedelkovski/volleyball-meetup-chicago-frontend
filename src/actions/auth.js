@@ -10,26 +10,12 @@ import {
   LOGOUT,
 } from "./types";
 
-// Load User
-// export const loadUser = () => async (dispatch) => {
-//   try {
-//     const res = await api.get("/getCurrentUser");
-
-//     dispatch({
-//       type: USER_LOADED,
-//       payload: res.data,
-//     });
-//   } catch (err) {
-//     dispatch({
-//       type: AUTH_ERROR,
-//     });
-//   }
-// };
-
 // Register User
-export const register = (formData) => async (dispatch) => {
+export const register = (name, email, password) => async (dispatch) => {
+  const body = { name, email, password };
+
   try {
-    const res = await api.post("/signup", formData);
+    const res = await api.post("/signup", body);
 
     dispatch({
       type: REGISTER_SUCCESS,

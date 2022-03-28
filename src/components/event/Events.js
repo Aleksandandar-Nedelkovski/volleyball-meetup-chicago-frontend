@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import { getEvents } from "../../actions/event"
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import EventItem from "./EventItem"
+// import EventItem from "./EventItem"
 
 const Events = ( { getEvents, event: { events } }) => {
   useEffect(() => {
@@ -17,9 +17,9 @@ const Events = ( { getEvents, event: { events } }) => {
         <i className="fas fa-user" /> Welcome to the community
       </p>
       <div className="events">
-        {events.map((event) => (
+        {/* {events.map((event) => (
           <EventItem key={event._id} event={event} />
-        ))}
+        ))} */}
       </div>
     </section>
   )

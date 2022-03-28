@@ -40,7 +40,6 @@ const Navbar = () => {
         <img className={classes.image} src={volleyballLogo} alt="icon" height="40px" />
       </Link>
       <Typography className={classes.userName} variant="h6"><Link to="/calendar">Calendar</Link></Typography>
-      <Button component={Link} to="/auth" variant="contained" color="primary">Sign In</Button>
       <Toolbar className={classes.toolbar}>
         {user ? (
           <div className={classes.profile}>
