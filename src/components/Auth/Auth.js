@@ -8,16 +8,21 @@ import useStyles from './styles';
 import Input from './Input';
 import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
 import Icon from "./icon"
+import { useNavigate } from 'react-router-dom';
+
+import { AUTH } from '../../actions/types';
+
 const initialState = { name: '', email: '', password: '', confirmPassword: '' };
 
 const Auth = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const [form, setForm] = useState(initialState);
+  const [form] = useState(initialState);
   const [showPassword, setShowPassword] = useState(false)
   const [isSignup, setIsSignup] = useState(false);
-  
+
   const handleShowPassword = (e) => setShowPassword((preShowPassword) => !preShowPassword)
 
   const handleChange = (e) => {
@@ -32,6 +37,20 @@ const Auth = () => {
     setIsSignup((prevIsSignup) => !prevIsSignup);
     handleShowPassword(false);
   };
+
+  const googleSuccess = async (res) => {
+    const result = res.profileObj;
+    const token = res.tokenId;
+
+    try {
+      dispatch({ type: AUTH, data: { result, token } });
+      navigate('/dashboard');
+    } catch (error) {
+      console.log(error);
+    }};
+
+    const googleError = () => console.log('Google Sign In was unsuccessful. Try again later');
+
 
   return (
     <Container component="main" maxWidth="xs">
@@ -55,12 +74,15 @@ const Auth = () => {
             {isSignup ? 'Sign Up' : 'Sign In'}
           </Button>
           <GoogleLogin
-            clientId="GOOGLE ID"
+            clientId="516747975733-0ptt8p439tqqiq1lu1m3l1vjb1j0o3ri.apps.googleusercontent.com"
             render={(renderProps) => (
               <Button className={classes.googleButton} color="primary" fullWidth onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon />} variant="contained">
-                Sign In With Google</Button>
+                Google Sign In
+              </Button>
             )}
-          
+            onSuccess={googleSuccess}
+            onFailure={googleError}
+            cookiePolicy="single_host_origin"
           />
           <Grid container justifyContent="flex-start">
             <Grid item>
