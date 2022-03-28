@@ -1,57 +1,40 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment } from "react";
 import {
-  BrowserRouter as Router,
+  BrowserRouter,
   Route,
-  Routes,
+  Routes
 } from "react-router-dom";
 
 import App from "../App";
-import SignIn from "../views/SignIn";
-import SignUp from "../views/SignUp";
+import Auth from "../components/Auth/Auth";
 import VolleyballCalendar from "../components/calendar/Calendar";
-import Events from "../components/event/Event";
-import Navigation from "../views/Navigation";
+import Events from "../components/event/Events";
 import "./Router.css";
-import { LOGOUT } from "../actions/types";
 import Dashboard from "../components/Dashboard"
-import PrivateRoute from "./PrivateRoute";
+import NotFound from "../components/layout/NotFound"
 
 // Redux
 import { Provider } from "react-redux";
 import store from "../store";
-import { loadUser } from "../actions/auth";
-import setAuthToken from "./setAuthToken";
+import Navbar from "../components/navbar/Navbar";
 
 const AppRouter = () => {
-  // useEffect(() => {
-  //   // check for token in LS
-  //   if (localStorage.token) {
-  //     setAuthToken(localStorage.token);
-  //   }
-  //   store.dispatch(loadUser());
-
-  //   // log user out from all tabs if they log out in one tab
-  //   window.addEventListener("storage", () => {
-  //     if (!localStorage.token) store.dispatch({ type: LOGOUT });
-  //   });
-  // }, []);
 
   return (
     <Provider store={store}>
-      <Router>
+      <BrowserRouter>
         <Fragment>
-          <Navigation />
+          <Navbar />
           <Routes>
             <Route exact path="/" element={<App />} />
-            <Route exact path="/sign-in" element={<SignIn />} />
-            <Route exact path="/sign-up" element={<SignUp />} />
-            <Route exact path="/calendar" element={<VolleyballCalendar />} />
-            <Route exact path="/events" element={<Events />} />
-            <Route exact path="/dashboard" element={<PrivateRoute component={Dashboard} />}
-          />
+            <Route exact path="auth" element={<Auth />} /> 
+            <Route exact path="calendar" element={<VolleyballCalendar />} />
+            <Route exact path="events" element={<Events />} />
+            <Route exact path="dashboard" element={<Dashboard />} />
+            <Route path="/*" element={<NotFound />} />
           </Routes>
         </Fragment>
-      </Router>
+      </BrowserRouter>
     </Provider>
   );
 }

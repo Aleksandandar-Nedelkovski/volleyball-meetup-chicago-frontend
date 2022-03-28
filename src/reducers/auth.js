@@ -1,54 +1,29 @@
 import {
-  REGISTER_SUCCESS,
-  USER_LOADED,
-  AUTH_ERROR,
-  LOGIN_SUCCESS,
+  AUTH,
   LOGOUT,
-  ACCOUNT_DELETED,
 } from "../actions/types";
 
-const initialState = {
-  token: localStorage.getItem("token"),
-  isAuthenticated: null,
-  loading: true,
-  user: null,
-};
-
-function authReducer(state = initialState, action) {
-  const { type, payload } = action;
+function authReducer(state = { authData: null }, action) {
+  const { type } = action;
 
   switch (type) {
-    case USER_LOADED:
+
+    case AUTH:
+      localStorage.setItem('profile', JSON.stringify({ ...action.data }));
       return {
         ...state,
-        isAuthenticated: true,
-        loading: false,
-        user: payload,
+        authData: action.data, 
+        loading: false, 
+        errors: null
       };
-    case REGISTER_SUCCESS:
-    case LOGIN_SUCCESS:
-      return {
-        ...state,
-        ...payload,
-        isAuthenticated: true,
-        loading: false,
-      };
-    case ACCOUNT_DELETED:
-      return {
-        ...state,
-        token: null,
-        isAuthenticated: false,
-        loading: false,
-        user: null,
-      };
-    case AUTH_ERROR:
+
     case LOGOUT:
+      localStorage.clear();
       return {
         ...state,
-        token: null,
-        isAuthenticated: false,
-        loading: false,
-        user: null,
+        authData: null, 
+        loading: false, 
+        errors: null
       };
     default:
       return state;

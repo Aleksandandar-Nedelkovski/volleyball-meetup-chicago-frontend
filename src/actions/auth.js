@@ -3,28 +3,28 @@ import { setAlert } from "./alert";
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
-  USER_LOADED,
-  AUTH_ERROR,
+  // USER_LOADED,
+  // AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
 } from "./types";
 
 // Load User
-export const loadUser = () => async (dispatch) => {
-  try {
-    const res = await api.get("/getCurrentUser");
+// export const loadUser = () => async (dispatch) => {
+//   try {
+//     const res = await api.get("/getCurrentUser");
 
-    dispatch({
-      type: USER_LOADED,
-      payload: res.data,
-    });
-  } catch (err) {
-    dispatch({
-      type: AUTH_ERROR,
-    });
-  }
-};
+//     dispatch({
+//       type: USER_LOADED,
+//       payload: res.data,
+//     });
+//   } catch (err) {
+//     dispatch({
+//       type: AUTH_ERROR,
+//     });
+//   }
+// };
 
 // Register User
 export const register = (formData) => async (dispatch) => {
@@ -35,7 +35,7 @@ export const register = (formData) => async (dispatch) => {
       type: REGISTER_SUCCESS,
       payload: res.data,
     });
-    dispatch(loadUser());
+    // dispatch(loadUser());
   } catch (err) {
     const errors = err.response.data.errors;
 
@@ -61,7 +61,6 @@ export const login = (email, password) => async (dispatch) => {
       payload: res.data,
     });
 
-    // dispatch(loadUser());
   } catch (err) {
     const errors = err.response.data.errors;
 

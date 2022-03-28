@@ -15,12 +15,14 @@ function activeLink(input) {
 }
 
 function Navigation() {
+  const user = null;
+  
   return (
     <header className="p-3 mb-3 border-bottom">
       <div className="container">
+        
         <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-          <a href="/" className="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
-          </a>
+          
           <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
             <li>
               <Link to="/" className="nav-link px-2 link-dark" aria-current="page" id="home" onClick={() => activeLink("home")}>Home</Link>
@@ -39,6 +41,13 @@ function Navigation() {
               <Link to="/calendar" className="nav-link px-2 link-dark" aria-current="page" id="calendar" onClick={() => activeLink("calendar")}>Calendar</Link>
             </li>
           </ul>
+          {user ? (
+          <div>login </div>
+        ):(
+          <button type="button" className="btn btn-primary">
+          <Link to="/auth" className="nav-link px-2 link-dark" aria-current="page" id="home">Login</Link>
+          </button>
+        )}
         </div>
       </div>
     </header>
