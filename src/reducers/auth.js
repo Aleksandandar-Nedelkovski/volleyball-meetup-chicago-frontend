@@ -1,28 +1,37 @@
-import {
-  AUTH,
-  LOGOUT,
-} from "../actions/types";
+import * as actionType from "../actions/types";
 
 function authReducer(state = { authData: null }, action) {
-  const { type } = action;
-
-  switch (type) {
-
-    case AUTH:
+  switch (action.type) {
+    case actionType.AUTH:
       localStorage.setItem('profile', JSON.stringify({ ...action.data }));
       return {
         ...state,
-        authData: action.data, 
-        loading: false, 
+        authData: action.data,
+        loading: false,
         errors: null
       };
-
-    case LOGOUT:
+    case actionType.LOGIN_SUCCESS:
+      localStorage.setItem('profile', JSON.stringify({ ...action.data }));
+      return {
+        ...state,
+        authData: action.data,
+        loading: false,
+        errors: null
+      };
+    case actionType.REGISTER_SUCCESS:
+      localStorage.setItem('profile', JSON.stringify({ ...action.data }));
+      return {
+        ...state,
+        authData: action.data,
+        loading: false,
+        errors: null
+      };
+    case actionType.LOGOUT:
       localStorage.clear();
       return {
         ...state,
-        authData: null, 
-        loading: false, 
+        authData: null,
+        loading: false,
         errors: null
       };
     default:

@@ -11,6 +11,7 @@ import VolleyballCalendar from "../components/calendar/Calendar";
 import Events from "../components/event/Events";
 import "./Router.css";
 import Dashboard from "../components/Dashboard"
+import SignIn from "../views/SignIn"
 import NotFound from "../components/layout/NotFound"
 
 // Redux
@@ -28,6 +29,7 @@ const AppRouter = () => {
           <Routes>
             <Route exact path="/" element={<App />} />
             <Route exact path="auth" element={<Auth />} /> 
+            <Route exact path="sign-in" element={<SignIn />} /> 
             <Route exact path="calendar" element={<VolleyballCalendar />} />
             <Route exact path="events" element={<Events />} />
             <Route exact path="dashboard" element={<Dashboard />} />

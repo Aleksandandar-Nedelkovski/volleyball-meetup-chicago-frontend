@@ -4,30 +4,43 @@ import { connect } from 'react-redux';
 import { addEvent } from '../../actions/event';
 
 const EventForm = ({ addEvent }) => {
-  const [text, setText] = useState('');
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    start_date: "",
+  });
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    setFormData({...formData, [e.target.name]: e.target.value})
+  }
+
+  const {title, description, start_date} = formData;
 
   return (
     <div className='event-form'>
       <div className='bg-primary p'>
-        <h3>Say Something...</h3>
+        <h3>Create an Event</h3>
       </div>
       <form
         className='form my-1'
         onSubmit={e => {
           e.preventDefault();
-          addEvent({ text });
-          setText('');
+          addEvent({title, description, start_date });
+          setFormData(formData);
         }}
       >
+        <input name='title' />
         <textarea
-          name='text'
+          name='description'
           cols='30'
           rows='5'
           placeholder='Create an event'
-          value={text}
-          onChange={e => setText(e.target.value)}
+          value={description}
+          onChange={handleChange}
           required
         />
+        <input type="datetime-local"/>
         <input type='submit' className='btn btn-dark my-1' value='Submit' />
       </form>
     </div>
