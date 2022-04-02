@@ -12,10 +12,10 @@ const EventForm = ({ addEvent }) => {
 
   const handleChange = (e) => {
     e.preventDefault();
-    setFormData({...formData, [e.target.name]: e.target.value})
+    setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  const {title, description, start_date} = formData;
+  const { title, description, start_date } = formData;
 
   return (
     <div className='event-form'>
@@ -26,21 +26,32 @@ const EventForm = ({ addEvent }) => {
         className='form my-1'
         onSubmit={e => {
           e.preventDefault();
-          addEvent({title, description, start_date });
           setFormData(formData);
+          addEvent({ title, description, start_date });
         }}
       >
-        <input name='title' />
+        <input
+          name='title'
+          placeholder='title'
+          value={title}
+          onChange={handleChange}
+        />
         <textarea
           name='description'
           cols='30'
           rows='5'
-          placeholder='Create an event'
+          placeholder='Description'
           value={description}
           onChange={handleChange}
           required
         />
-        <input type="datetime-local"/>
+        <input
+          type="datetime-local"
+          placeholder='Start time'
+          name="start_date"
+          value={start_date}
+          onChange={handleChange}
+        />
         <input type='submit' className='btn btn-dark my-1' value='Submit' />
       </form>
     </div>

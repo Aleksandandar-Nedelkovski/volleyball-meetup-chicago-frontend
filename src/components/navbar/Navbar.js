@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { AppBar, Typography, Toolbar, Avatar, Button } from '@material-ui/core';
+import { AppBar, Typography, Button } from '@material-ui/core';
 import { Link, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import decode from 'jwt-decode';
@@ -31,7 +31,6 @@ const Navbar = () => {
       }
     }
     setUser(JSON.parse(localStorage.getItem('profile')));
-    console.log(user)
   }, [location]);
 
   return (
