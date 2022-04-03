@@ -3,19 +3,18 @@ import { TextField, Button, Typography, Paper } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import FileBase from 'react-file-base64';
 import { useNavigate } from 'react-router-dom';
-
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { addEvent } from '../../actions/event';
 import useStyles from './styles';
 
-const Form = ({ currentId, setCurrentId }) => {
+const Form = ({ addEvent, currentId, setCurrentId }) => {
   const [eventData, setEventData] = useState({ title: '', description: '', start_date: '' });
   const event = useSelector((state) => (currentId ? state.event.events.find((description) => description.id === currentId) : null));
   const dispatch = useDispatch();
   const classes = useStyles();
   const user = JSON.parse(localStorage.getItem('profile'));
   const history = useNavigate();
-
-  // const {start_date} = eventData;
 
   const clear = () => {
     setCurrentId(0);
@@ -58,4 +57,12 @@ const Form = ({ currentId, setCurrentId }) => {
   );
 };
 
-export default Form;
+Form.propTypes = {
+  addEvent: PropTypes.func.isRequired,
+  event: PropTypes.object.isRequired
+};
+
+const mapStateToProps = (state) => ({
+  event: state.event.events
+});
+export default connect(mapStateToProps, { addEvent })(Form);

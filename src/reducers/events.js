@@ -1,6 +1,7 @@
 import {
   GET_EVENT,
   GET_EVENTS,
+  ADD_EVENT,
   EVENT_ERROR
 } from '../actions/types';
 
@@ -22,6 +23,12 @@ function eventsReducer(state = initialState, action) {
         loading: false
       };
     case GET_EVENT:
+      return {
+        ...state,
+        event: payload,
+        loading: false
+      };
+    case ADD_EVENT:
       return {
         ...state,
         event: payload,
