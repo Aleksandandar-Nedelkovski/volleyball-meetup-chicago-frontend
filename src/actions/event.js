@@ -26,7 +26,8 @@ export const getEvents = () => async (dispatch) => {
 // Add event
 export const addEvent = (formData) => async (dispatch) => {
   try {
-    const res = await api.post('/create_event', formData);
+    const res = await api.post('/register-event', formData);
+    console.log("res", res);
 
     dispatch({
       type: ADD_EVENT,
@@ -37,7 +38,7 @@ export const addEvent = (formData) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: EVENT_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status }
+      payload: { msg: err}
     });
   }
 };
